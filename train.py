@@ -14,7 +14,7 @@ PROMPT = args.prompt
 MAX_LENGTH = args.data_max_length
 
 swanlab.config.update({
-    "model": args.model,
+    "model": args.model_path,
     "prompt": PROMPT,
     "data_max_length": MAX_LENGTH,
 })
@@ -90,11 +90,11 @@ def predict(messages, model, tokenizer):
 
     return response
 
-model_dir = snapshot_download(args.model, cache_dir=args.cache_dir, revision=args.revision)
+model_dir = snapshot_download(args.model_path, cache_dir=args.cache_dir, revision=args.revision)
 
 # Transformers加载模型权重
 tokenizer = AutoTokenizer.from_pretrained(args.model_path, use_fast=args.use_fast_tokenizer, trust_remote_code=args.trust_remote_code)
-model = AutoModelForCausalLM.from_pretrained(args.model_local_path, device_map=args.device_map, torch_dtype=getattr(torch, args.torch_dtype))
+model = AutoModelForCausalLM.from_pretrained(args.model_path, device_map=args.device_map, torch_dtype=getattr(torch, args.torch_dtype))
 if args.gradient_checkpointing:
     model.enable_input_require_grads()
 

@@ -1,6 +1,6 @@
 # d:\Code\LLM-workspace\MLLM-SFT\run_train.sh
 #!/usr/bin/env bash
-python d:\Code\LLM-workspace\MLLM-SFT\train.py \
+python train.py \
   --model_path Qwen/Qwen3-1.7B \
   --cache-dir ./ \
   --revision master \
