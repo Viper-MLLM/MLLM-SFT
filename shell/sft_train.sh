@@ -1,0 +1,32 @@
+# d:\Code\LLM-workspace\MLLM-SFT\run_train.sh
+#!/usr/bin/env bash
+python d:\Code\LLM-workspace\MLLM-SFT\train.py \
+  --model_path Qwen/Qwen3-1.7B \
+  --cache-dir ./ \
+  --revision master \
+  --prompt "你是一个医学专家，你需要根据用户的问题，给出带有思考的回答。" \
+  --data-max-length 2048 \
+  --train-dataset-path train.jsonl \
+  --val-dataset-path val.jsonl \
+  --train-formatted-path train_format.jsonl \
+  --val-formatted-path val_format.jsonl \
+  --output-dir ./output/Qwen3-1.7B \
+  --per-device-train-batch-size 1 \
+  --per-device-eval-batch-size 1 \
+  --gradient-accumulation-steps 4 \
+  --eval-strategy steps \
+  --eval-steps 100 \
+  --logging-steps 10 \
+  --num-train-epochs 2 \
+  --save-steps 400 \
+  --learning-rate 1e-4 \
+  --save-on-each-node true \
+  --gradient-checkpointing true \
+  --report-to swanlab \
+  --run-name qwen3-1.7B \
+  --swanlab-project qwen3-sft-medical \
+  --device-map auto \
+  --torch-dtype bfloat16 \
+  --use-fast-tokenizer false \
+  --trust-remote-code true \
+  --preview-samples-count 3
